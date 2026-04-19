@@ -92,11 +92,7 @@ lockNowBtn.addEventListener('click', async () => {
 });
 
 document.getElementById('feedbackBtn').addEventListener('click', () => {
-  const subject = encodeURIComponent('rwn Profile Lock Feedback');
-  const body = encodeURIComponent(
-    `Hi,\n\nI have feedback about rwn Profile Lock:\n\n[Your message here]\n\n---\nExtension version: 1.0.0`
-  );
-  window.open(`mailto:your@email.com?subject=${subject}&body=${body}`);
+  window.open('https://github.com/efransiscus/rwn-profile-locker-chrome/issues/new', '_blank');
 });
 
 populateIdle();

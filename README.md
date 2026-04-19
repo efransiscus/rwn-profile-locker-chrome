@@ -1,6 +1,12 @@
 # rwn Profile Lock
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Chrome Manifest V3 extension that PIN-locks the Chrome profile it is installed in.
+
+**Open source:** [github.com/efransiscus/rwn-profile-locker-chrome](https://github.com/efransiscus/rwn-profile-locker-chrome)
+
+**Feedback & bugs:** [GitHub Issues](https://github.com/efransiscus/rwn-profile-locker-chrome/issues)
 
 ## What it does
 
