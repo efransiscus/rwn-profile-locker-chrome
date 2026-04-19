@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rwn Profile Lock — Set up PIN</title>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>Set up your PIN</h1>
+    <div class="warning">If you forget this PIN, you must uninstall and reinstall the extension. There is no recovery.</div>
+    <form id="setupForm">
+      <div class="form-group">
+        <label for="pin">Enter PIN</label>
+        <input type="password" id="pin" inputmode="numeric" autocomplete="off" maxlength="32" />
+      </div>
+      <div class="form-group">
+        <label for="confirmPin">Confirm PIN</label>
+        <input type="password" id="confirmPin" inputmode="numeric" autocomplete="off" maxlength="32" />
+      </div>
+      <button type="submit" id="submitBtn">Set PIN</button>
+      <div class="error" id="error"></div>
+    </form>
+  </div>
+  <script type="module" src="setup.js"></script>
+</body>
+</html>

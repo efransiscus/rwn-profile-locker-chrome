@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rwn Profile Lock — Options</title>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+  <div class="card" style="max-width: 520px;">
+    <h1>rwn Profile Lock Options</h1>
+
+    <div class="section">
+      <div class="section-title">Change PIN</div>
+      <form id="changeForm">
+        <div class="form-group">
+          <label for="currentPin">Current PIN</label>
+          <input type="password" id="currentPin" inputmode="numeric" autocomplete="off" maxlength="32" />
+        </div>
+        <div class="form-group">
+          <label for="newPin">New PIN</label>
+          <input type="password" id="newPin" inputmode="numeric" autocomplete="off" maxlength="32" />
+        </div>
+        <div class="form-group">
+          <label for="confirmNewPin">Confirm new PIN</label>
+          <input type="password" id="confirmNewPin" inputmode="numeric" autocomplete="off" maxlength="32" />
+        </div>
+        <button type="submit" id="changeBtn">Change PIN</button>
+        <div class="error" id="changeError"></div>
+        <div class="success" id="changeSuccess"></div>
+      </form>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Idle auto-lock</div>
+      <div class="form-group">
+        <label for="idleSelect">Lock after</label>
+        <select id="idleSelect"></select>
+      </div>
+      <div class="note">Idle timer uses OS-level input. Agents that drive Chrome via DevTools Protocol will still trip this timer; agents that emulate real mouse/keyboard will not.</div>
+      <div class="success" id="idleSuccess"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Lock now</div>
+      <button id="lockNowBtn">Lock profile now</button>
+    </div>
+
+    <div class="section">
+      <div class="section-title">About</div>
+      <p style="font-size: 14px; color: #94a3b8; margin: 0;">Version 1.0.0</p>
+      <p style="font-size: 14px; margin-top: 10px;">
+        <a href="readme.html" target="_blank">About / README</a> &nbsp;·&nbsp;
+        <a href="faq.html" target="_blank">FAQ</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Feedback</div>
+      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 12px;">Found a bug or have a suggestion?</p>
+      <button id="feedbackBtn" style="background: linear-gradient(135deg, #334155 0%, #1e293b 100%); box-shadow: 0 4px 14px 0 rgba(0,0,0,0.2);">Send feedback</button>
+      <p class="note" style="margin-top: 8px;">Opens your email client. You can change the recipient address in the source code.</p>
+    </div>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

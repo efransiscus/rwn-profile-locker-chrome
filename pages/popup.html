@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rwn Profile Lock</title>
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    body {
+      min-width: 260px;
+      padding: 0;
+      margin: 0;
+      background: #050508;
+      min-height: auto;
+      display: block;
+    }
+    .card {
+      margin: 0;
+      border-radius: 20px;
+      border: none;
+      max-width: 100%;
+      padding: 28px;
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    button {
+      margin-bottom: 10px;
+    }
+    button:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>rwn Profile Lock</h1>
+    <button id="lockBtn">Lock now</button>
+    <button id="optionsBtn">Change PIN / Options</button>
+    <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: center;">
+      <a href="faq.html" target="_blank" style="font-size: 12px; color: #64748b;">FAQ</a>
+      <span style="font-size: 12px; color: #334155;">·</span>
+      <a href="readme.html" target="_blank" style="font-size: 12px; color: #64748b;">About</a>
+    </div>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

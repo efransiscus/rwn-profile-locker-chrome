@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rwn Profile Lock — FAQ</title>
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .faq-item { margin-bottom: 24px; }
+    .faq-q { color: #e2e8f0; font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+    .faq-a { color: #94a3b8; font-size: 14px; line-height: 1.7; }
+    .faq-a code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; font-size: 13px; }
+    .back { margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <div class="card" style="max-width: 640px;">
+    <h1>FAQ</h1>
+
+    <div class="faq-item">
+      <div class="faq-q">What happens if I forget my PIN?</div>
+      <div class="faq-a">There is no recovery. You must remove the extension from <code>chrome://extensions</code> and load it again. All data is wiped and you will set a new PIN.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why did all my tabs go away when I unlocked?</div>
+      <div class="faq-a">They didn't. The extension restores your previous tabs when you unlock. If a tab was opened while locked, it has no previous page to return to, so it falls back to a new tab.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does this work in Chrome Guest mode?</div>
+      <div class="faq-a">No — and that is intentional. Guest mode is your "agent-safe" browsing space. The extension is not installed there, so agents running in Guest mode are never blocked by it.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I change my PIN?</div>
+      <div class="faq-a">Yes. Open the extension options (from the popup or right-click the icon → Options) and use the <strong>Change PIN</strong> section.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I completely remove the lock?</div>
+      <div class="faq-a">Go to <code>chrome://extensions</code>, find <strong>rwn Profile Lock</strong>, and click <strong>Remove</strong>. This deletes the PIN hash and all settings.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is my PIN stored securely?</div>
+      <div class="faq-a">Your raw PIN is never stored. Only a PBKDF2-SHA256 hash (150,000 iterations, random 16-byte salt) is kept in local storage. The salt and hash are visible to anyone with DevTools access — this is an accepted limitation of browser-extension security.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why does the screen flash for a split second on startup?</div>
+      <div class="faq-a">Chrome restores your session tabs before the extension service worker wakes up. There is a brief (~500ms) window where restored tabs are visible before they are redirected to the lock page. This is a known Chrome limitation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Will this stop AI agents completely?</div>
+      <div class="faq-a">No. This is a simple guardrail, not a hardened security boundary. Agents with OS-level access, DevTools Protocol, or the ability to disable extensions can bypass it. Run agents in Chrome's Guest profile for proper isolation.</div>
+    </div>
+
+    <div class="back">
+      <button onclick="window.close()">Close</button>
+    </div>
+  </div>
+</body>
+</html>
