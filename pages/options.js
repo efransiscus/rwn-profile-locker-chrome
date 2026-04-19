@@ -92,7 +92,8 @@ lockNowBtn.addEventListener('click', async () => {
 });
 
 document.getElementById('feedbackBtn').addEventListener('click', () => {
-  window.open('https://github.com/efransiscus/rwn-profile-locker-chrome/issues/new', '_blank');
+  // Replace YOUR_FORM_ID with your actual Google Form ID after running google-form-script.gs
+  window.open('https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform', '_blank');
 });
 
 populateIdle();

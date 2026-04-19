@@ -8,8 +8,10 @@ A Chrome Manifest V3 extension that PIN-locks the Chrome profile it is installed
 
 ## Feedback
 
-Found a bug or have a suggestion? Open a GitHub Issue:
-**[github.com/efransiscus/rwn-profile-locker-chrome/issues](https://github.com/efransiscus/rwn-profile-locker-chrome/issues)**
+Found a bug or have a suggestion? Send feedback via our Google Form:
+**[Submit Feedback](https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform)**
+
+To set up your own form, run `google-form-script.gs` in [Google Apps Script](https://script.google.com) and replace `YOUR_FORM_ID` in the extension code with your form's ID.
 
 ## What it does
 
