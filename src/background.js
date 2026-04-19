@@ -15,24 +15,29 @@ import {
 const EXT_ORIGIN = chrome.runtime.getURL('');
 const LOCK_URL = chrome.runtime.getURL(PAGES.LOCK);
 
+function isChromeExtensionsUrl(url) {
+  return url && (url === 'chrome://extensions' || url.startsWith('chrome://extensions/'));
+}
+
 async function lockAllTabs() {
   const tabs = await chrome.tabs.query({});
   const existing = await chrome.storage.session.get('lockedTabUrls');
   if (!existing.lockedTabUrls) {
     const urls = tabs
-      .filter(t => t.url && !t.url.startsWith(EXT_ORIGIN) && t.url !== LOCK_URL)
+      .filter(t => t.url && !t.url.startsWith(EXT_ORIGIN) && t.url !== LOCK_URL && !isChromeExtensionsUrl(t.url))
       .map(t => ({ id: t.id, url: t.url }));
     await chrome.storage.session.set({ lockedTabUrls: urls });
   }
 
   for (const tab of tabs) {
-    if (!tab.url || !tab.url.startsWith(EXT_ORIGIN)) {
-      try {
-        await chrome.tabs.update(tab.id, { url: LOCK_URL });
-      } catch (_) {
-        // Tab may have closed or be unpdateable (e.g. chrome:// settings)
-      }
+    if (!tab.url || tab.url.startsWith(EXT_ORIGIN)) continue;
+    if (isChromeExtensionsUrl(tab.url)) {
+      try { await chrome.tabs.remove(tab.id); } catch (_) {}
+      continue;
     }
+    try {
+      await chrome.tabs.update(tab.id, { url: LOCK_URL });
+    } catch (_) {}
   }
 }
 
@@ -88,6 +93,14 @@ chrome.tabs.onCreated.addListener(async (tab) => {
   if (await isUnlocked()) return;
   if (tab.pendingUrl && tab.pendingUrl.startsWith(EXT_ORIGIN)) return;
   if (tab.url && tab.url.startsWith(EXT_ORIGIN)) return;
+  if (tab.pendingUrl && isChromeExtensionsUrl(tab.pendingUrl)) {
+    try { await chrome.tabs.remove(tab.id); } catch (_) {}
+    return;
+  }
+  if (tab.url && isChromeExtensionsUrl(tab.url)) {
+    try { await chrome.tabs.remove(tab.id); } catch (_) {}
+    return;
+  }
   try {
     await chrome.tabs.update(tab.id, { url: LOCK_URL });
   } catch (_) {}
@@ -98,6 +111,10 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   if (details.frameId !== 0) return;
   if (await isUnlocked()) return;
   if (details.url && details.url.startsWith(EXT_ORIGIN)) return;
+  if (details.url && isChromeExtensionsUrl(details.url)) {
+    try { await chrome.tabs.remove(details.tabId); } catch (_) {}
+    return;
+  }
   try {
     await chrome.tabs.update(details.tabId, { url: LOCK_URL });
   } catch (_) {}
