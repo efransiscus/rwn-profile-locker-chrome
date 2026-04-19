@@ -93,7 +93,7 @@ lockNowBtn.addEventListener('click', async () => {
 
 document.getElementById('feedbackBtn').addEventListener('click', () => {
   // Replace YOUR_FORM_ID with your actual Google Form ID after running google-form-script.gs
-  window.open('https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform', '_blank');
+  window.open('https://forms.gle/ZCQj1iiAPu75LUvr7', '_blank');
 });
 
 populateIdle();
