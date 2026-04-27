@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "rwn Profile Lock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PIN-lock your Chrome profile. Re-locks on idle and restart.",
   "minimum_chrome_version": "120",
   "permissions": [
