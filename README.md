@@ -1,6 +1,6 @@
 <img width="662" height="353" alt="image" src="https://github.com/user-attachments/assets/82d3e71c-a2a8-4a06-8337-6ed436b77a63" />
 
-# rwn Profile Lock
+# rwn Profile Lock for Chrome
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
