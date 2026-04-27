@@ -35,7 +35,7 @@ This extension is a **simple guard**, not a hardened lock.
 - It does **not** block agents running in a separate Chrome profile or a separate browser entirely.
 
 ## What it MEANS
-If you put a password and then the password has GONE, you KNOW somebody accessed your session. 
+If you put a password and then the password has GONE, you KNOW somebody has accessed your session intentionally. 
 
 ## Recommended defense-in-depth
 
