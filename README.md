@@ -1,3 +1,5 @@
+<img width="662" height="353" alt="image" src="https://github.com/user-attachments/assets/82d3e71c-a2a8-4a06-8337-6ed436b77a63" />
+
 # rwn Profile Lock
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -32,6 +34,9 @@ This extension is a **simple guard**, not a hardened lock.
 - It does **not** block agents reading `chrome.storage.local` with a debugger attached.
 - It does **not** block agents running in a separate Chrome profile or a separate browser entirely.
 
+## What it MEANS
+If you put a password and then the password has GONE, you KNOW somebody accessed your session. 
+
 ## Recommended defense-in-depth
 
 1. Run AI browser agents in Chrome's **Guest profile** or a dedicated secondary profile — never the locked profile.
@@ -63,3 +68,7 @@ If you forget your PIN there is **no recovery**. Remove and re-add the extension
 5. DevTools on the lock page can inspect extension storage. Storage holds only the PIN *hash* (not reversible), but an attacker with DevTools could set `unlocked = true` in session storage and bypass. This is the fundamental limit of extension-layer security.
 6. Idle auto-lock is based on OS input signals. Agents that emulate real mouse/keyboard will keep the session "active" and will not trigger idle lock. Agents that drive Chrome via CDP will trigger it.
 7. If you forget your PIN there is no recovery. Remove and re-add the extension to reset.
+
+
+<img width="252" height="256" alt="image" src="https://github.com/user-attachments/assets/4268e6ab-1a05-4db2-9da3-971bfbbb8861" />
+<img width="398" height="846" alt="image" src="https://github.com/user-attachments/assets/aa9eb84c-d5fe-4c94-9e28-081d9b9706f9" />
