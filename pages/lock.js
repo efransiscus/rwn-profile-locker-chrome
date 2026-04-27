@@ -73,7 +73,9 @@ async function init() {
   }
 
   if (resp.unlocked) {
-    chrome.tabs.update({ url: 'chrome://newtab/' });
+    const params = new URLSearchParams(window.location.search);
+    const returnUrl = params.get('returnUrl');
+    chrome.tabs.update({ url: returnUrl || 'chrome://newtab/' });
     return;
   }
 
@@ -109,7 +111,9 @@ form.addEventListener('submit', async (e) => {
   try {
     const resp = await chrome.runtime.sendMessage({ type: MSG.UNLOCK_ATTEMPT, pin });
     if (resp && resp.ok) {
-      chrome.tabs.update({ url: 'chrome://newtab/' });
+      const params = new URLSearchParams(window.location.search);
+      const returnUrl = params.get('returnUrl');
+      chrome.tabs.update({ url: returnUrl || 'chrome://newtab/' });
     } else {
       pinInput.value = '';
       const note = resp && resp.lockoutSeconds > 0

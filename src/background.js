@@ -21,13 +21,8 @@ function isChromeExtensionsUrl(url) {
 
 async function lockAllTabs() {
   const tabs = await chrome.tabs.query({});
-  const existing = await chrome.storage.session.get('lockedTabUrls');
-  if (!existing.lockedTabUrls) {
-    const urls = tabs
-      .filter(t => t.url && !t.url.startsWith(EXT_ORIGIN) && t.url !== LOCK_URL && !isChromeExtensionsUrl(t.url))
-      .map(t => ({ id: t.id, url: t.url }));
-    await chrome.storage.session.set({ lockedTabUrls: urls });
-  }
+  // Clear legacy mapping; each lock page now carries its own return URL.
+  await chrome.storage.session.remove('lockedTabUrls');
 
   for (const tab of tabs) {
     if (!tab.url || tab.url.startsWith(EXT_ORIGIN)) continue;
@@ -36,24 +31,31 @@ async function lockAllTabs() {
       continue;
     }
     try {
-      await chrome.tabs.update(tab.id, { url: LOCK_URL });
+      const lockUrl = new URL(LOCK_URL);
+      lockUrl.searchParams.set('returnUrl', tab.url);
+      await chrome.tabs.update(tab.id, { url: lockUrl.toString() });
     } catch (_) {}
   }
 }
 
 async function unlockAndDismiss() {
   await setUnlocked(true);
-  const stored = await chrome.storage.session.get('lockedTabUrls');
-  const urls = stored.lockedTabUrls || [];
-  const lockTabs = await chrome.tabs.query({ url: LOCK_URL });
+  await chrome.storage.session.remove('lockedTabUrls');
+
+  const allTabs = await chrome.tabs.query({});
+  const lockTabs = allTabs.filter(t => t.url && t.url.startsWith(LOCK_URL));
 
   for (const tab of lockTabs) {
-    const original = urls.find(u => u.id === tab.id);
+    let returnUrl = 'chrome://newtab/';
     try {
-      await chrome.tabs.update(tab.id, { url: original ? original.url : 'chrome://newtab/' });
+      const url = new URL(tab.url);
+      const encoded = url.searchParams.get('returnUrl');
+      if (encoded) returnUrl = encoded;
+    } catch (_) {}
+    try {
+      await chrome.tabs.update(tab.id, { url: returnUrl });
     } catch (_) {}
   }
-  await chrome.storage.session.remove('lockedTabUrls');
 }
 
 // 1. On install: open setup if not done
