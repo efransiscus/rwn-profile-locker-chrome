@@ -4,7 +4,7 @@
 
 A Chrome Manifest V3 extension that PIN-locks the Chrome profile it is installed in.
 
-**Open source:** [github.com/efransiscus/rwn-profile-locker-chrome](https://github.com/efransiscus/rwn-profile-locker-chrome)
+**Open source:** [github.com/rwn34/rwn-profile-locker-chrome](https://github.com/rwn34/rwn-profile-locker-chrome)
 
 ## Feedback
 
